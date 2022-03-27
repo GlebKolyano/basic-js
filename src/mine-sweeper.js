@@ -23,9 +23,40 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let copy = matrix.map(i => i.slice()).map(i => i.fill(0))
+  
+  for (let i = 0; i < matrix.length; i++) {
+
+    for (let j = 0; j < matrix[i].length; j++) {
+    		
+        
+			if (i > 0 && i < matrix.length - 1) {
+      	if (matrix[i - 1][j - 1] === true) copy[i][j] += 1
+        if (matrix[i - 1][j] === true) copy[i][j] += 1
+        if (matrix[i - 1][j + 1] === true) copy[i][j] += 1
+        if (matrix[i + 1][j - 1] === true) copy[i][j] += 1
+        if (matrix[i + 1][j] === true) copy[i][j] += 1
+        if (matrix[i + 1][j + 1] === true) copy[i][j] += 1
+        if (matrix[i][j - 1] === true) copy[i][j] += 1
+        if (matrix[i][j + 1] === true) copy[i][j] += 1
+        
+      } else if (i === 0) {
+      	if (matrix[i + 1][j - 1] === true) copy[i][j] += 1
+        if (matrix[i + 1][j] === true) copy[i][j] += 1
+        if (matrix[i + 1][j + 1] === true) copy[i][j] += 1
+        if (matrix[i][j - 1] === true) copy[i][j] += 1
+        if (matrix[i][j + 1] === true) copy[i][j] += 1
+      } else if (i === matrix.length - 1) {
+      	if (matrix[i - 1][j - 1] === true) copy[i][j] += 1
+        if (matrix[i - 1][j] === true) copy[i][j] += 1
+        if (matrix[i - 1][j + 1] === true) copy[i][j] += 1
+        if (matrix[i][j - 1] === true) copy[i][j] += 1
+        if (matrix[i][j + 1] === true) copy[i][j] += 1
+      }
+    }
+  }
+  return copy
 }
 
 module.exports = {
